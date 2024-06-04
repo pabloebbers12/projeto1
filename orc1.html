@@ -1,0 +1,614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+	<title>Orçamentos</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="TI de Aluguel">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,700,800,900" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script language="javascript">
+			function valida(){
+				if(valida_cpf(document.getElementById('cpf').value.replace(/[^\d]+/g,'')))
+					alert('CPF  Válido');
+				else
+					alert('CPF Inválido');
+
+
+			}
+			
+			function valida_cpf(cpf){
+				  var numeros, digitos, soma, i, resultado, digitos_iguais;
+				  digitos_iguais = 1;
+				  if (cpf.length < 11)
+						return false;
+				  for (i = 0; i < cpf.length - 1; i++)
+						if (cpf.charAt(i) != cpf.charAt(i + 1))
+							  {
+							  digitos_iguais = 0;
+							  break;
+							  }
+				  if (!digitos_iguais)
+						{
+						numeros = cpf.substring(0,9);
+						digitos = cpf.substring(9);
+						soma = 0;
+						for (i = 10; i > 1; i--)
+							  soma += numeros.charAt(10 - i) * i;
+						resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+						if (resultado != digitos.charAt(0))
+							  return false;
+						numeros = cpf.substring(0,10);
+						soma = 0;
+						for (i = 11; i > 1; i--)
+							  soma += numeros.charAt(11 - i) * i;
+						resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+						if (resultado != digitos.charAt(1))
+							  return false;
+						return true;
+						}
+				  else
+						return false;
+			}
+		</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script><script src="maskedinput.js" type="text/javascript"></script>
+ 
+ <script type="text/javascript"> 
+
+jQuery.noConflict();jQuery(function($){   //$("#data").mask("99/99/9999");   $("#data").mask("*9/99/9999",{completed:function(){alert("You typed the following: "+this.val());}});
+ $("#data").mask("99/99/9999",{placeholder:" "});
+
+    $("#tel").mask("(99) 9999-9999");
+
+      $("#cel").mask("(99) 99999-9999");
+
+
+       $("#cpf").mask("999.999.999-99"); 
+
+
+         $("#cep").mask("99999 - 999");  
+
+
+           $("#cnpj").mask("99.999.999/9999-99"); 
+
+
+             $("#placa").mask("aaa - 9999"); });
+
+         </script>
+
+ <script>
+  
+
+function limpa_formulário_cep() {
+
+            document.getElementById('txtRua').value=("");
+            document.getElementById('txtBairro').value=("");
+            document.getElementById('txtCidade').value=("");
+            document.getElementById('txtUf').value=("");
+    }
+ function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('txtRua').value=(conteudo.logradouro);
+            document.getElementById('txtBairro').value=(conteudo.bairro);
+            document.getElementById('txtCidade').value=(conteudo.localidade);
+            document.getElementById('txtUf').value=(conteudo.uf);
+
+        } 
+        else {
+
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+
+}
+</script>
+     <script>
+var filtroTeclas = function(event) {
+  return ((event.charCode >= 48 && event.charCode <= 57) || (event.keyCode == 45 || event.charCode == 46))
+}
+</script>
+    <!-- Libs CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/v-nav-menu.css" rel="stylesheet" />
+    <link href="css/v-animation.css" rel="stylesheet" />
+    <link href="css/v-bg-stylish.css" rel="stylesheet" />
+    <link href="css/v-shortcodes.css" rel="stylesheet" />
+    <link href="css/theme-responsive.css" rel="stylesheet" />
+    <link href="plugins/owl-carousel/owl.theme.css" rel="stylesheet" />
+    <link href="plugins/owl-carousel/owl.carousel.css" rel="stylesheet" />
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5c886977101df77a8be24cb4/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+    <!-- Current Page CSS -->
+    <link href="plugins/rs-plugin/css/settings.css" rel="stylesheet" />
+    <link href="plugins/rs-plugin/css/custom-captions.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" >
+            
+            function limpa_formulário_cep() {
+                    //Limpa valores do formulário de cep.
+                    document.getElementById('rua').value=("");
+                    document.getElementById('bairro').value=("");
+                    document.getElementById('cidade').value=("");
+                    document.getElementById('uf').value=("");
+                    
+            }
+
+            function meu_callback(conteudo) {
+                if (!("erro" in conteudo)) {
+                    //Atualiza os campos com os valores.
+                    document.getElementById('rua').value=(conteudo.logradouro);
+                    document.getElementById('bairro').value=(conteudo.bairro);
+                    document.getElementById('cidade').value=(conteudo.localidade);
+                    document.getElementById('uf').value=(conteudo.uf);
+                    
+                } //end if.
+                else {
+                    //CEP não Encontrado.
+                    limpa_formulário_cep();
+                    alert("CEP não encontrado.");
+                }
+            }
+                
+            function pesquisacep(valor) {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = valor.replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        document.getElementById('rua').value="...";
+                        document.getElementById('bairro').value="...";
+                        document.getElementById('cidade').value="...";
+                        document.getElementById('uf').value="...";
+                        
+
+                        //Cria um elemento javascript.
+                        var script = document.createElement('script');
+
+                        //Sincroniza com o callback.
+                        script.src = '//viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                        //Insere script no documento e carrega o conteúdo.
+                        document.body.appendChild(script);
+
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            };
+        </script>
+        
+</head>
+
+<body class="no-page-top">
+
+    <!--Header-->
+    <!--Set your own background color to the header-->
+    <header class="semi-transparent-header" data-bg-color="rgba(9, 103, 139, 0.36)" data-font-color="#fff">
+        <div class="container">
+
+            <!--Site Logo-->
+            <div class="logo" data-sticky-logo="img/logo-white.png" data-normal-logo="img/logo-black.png">
+                <a href="index.html">
+                    <img alt="Logo" src="img/logo-black.png" data-logo-height="60">
+                </a>
+            </div>
+            <!--fim Site Logo-->
+
+            <div class="navbar-collapse nav-main-collapse collapse">
+
+               
+  <!--Main Menu-->
+                <nav class="nav-main mega-menu one-page-menu">
+                    <ul class="nav nav-pills nav-main" id="mainMenu">
+                        <li class="active">
+                            
+                            <a href="index.html#home"><font size="4,5px">Home</font></a>
+                        </li>
+                        <li>
+                            <a  href="index.html#features"><font size="4,5px">Serviços</font></a>
+                        </li>
+                        <li>
+                            <a  href="index.html#why-us"></i><font size="4,5px">Quem Somos</font></a>
+                        </li>
+                       
+                        <li>
+                            <a  href="index.html#screenshots"></i><font size="4,5px">Galeria</font></a>
+                        </li>
+                        <li>
+                            <a href="index.html#contato"></i><font size="4,5px">Contato</font></a>
+                        </li>
+
+                        <li class="dropdown">
+                             <a class="dropdown-toggle menu-icon"></i><font size="4,5px">Orçamentos</font><i class="fa fa-caret-down"></i></a>
+
+                              <ul class="dropdown-menu">
+                                <li><a href="orc1.html">Orçamento Design</a></li>
+                                <li><a href="orc2.html">Orçamento Manutenção</a></li>
+                            </ul>
+                        </li>
+
+
+                         <li>
+                            <a href="adm.html"></i><font size="4,5px">Administrador</font></a>
+                        </li>
+                       
+                    </ul>
+                </nav>
+
+                <!--End Main Menu-->
+            </div>
+            <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <!--End Header-->
+
+    <div id="container">
+
+        <br>
+
+            <!--Call Us-->
+            <div class="v-parallax v-bg-stylish" id="contact-us">
+                <div class="container">
+                    <div class="row center">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <p class="v-smash-text-large-2x">
+                                <span>Orçamento Design</span>
+                            </p>
+                            <div class="horizontal-break"></div>
+                        
+
+                            <p class="lead" style="color: #999;">
+                                Deixe seus dados e entraremos em contato!
+                            </p>
+                          
+
+                            <div class="v-spacer col-sm-12 v-height-small"></div>
+
+
+
+                            <form action="incluir_cliente_des.php" method="post">
+                                <div class="row">
+
+                                     <p class="lead" style="color: #999;">
+                                Dados Pessoais
+                            </p>
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label>Nome</label>
+                                            <input type="text" value=""  class="form-control" name="nome" id="nome">
+                                        </div>
+
+                                       
+
+
+                                        <div class="col-sm-4">
+                                            <label>Email</label>
+                                            <input type="email" value="" maxlength="100" class="form-control" name="email" id="email1">
+                                        </div>
+
+                                         <div class="col-sm-4">
+                                            <label>CPF</label>
+                                            <input type="text" value=""  class="form-control" name="cpf" onfocusout="valida()" id="cpf" onkeypress='return filtroTeclas(event)' onkeypress="mascaraCpf() ">   
+                         		
+  
+                                        </div>
+
+                                         <div class="col-sm-4">
+                                            <label>Telefone</label>
+                                            <input type="text" value=""  class="form-control" name="tel" id="tel" onkeypress='return filtroTeclas(event)'
+                                           onkeypress="mascaraTelefone()" maxlength="13">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Celular</label>
+                                            <input type="text" value=""  class="form-control" name="cel" id="cel"  onkeypress='mascaraCel()' maxlength="14">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Cep</label>
+                                            <input type="text" value=""   name="cep" id="cep" onkeypress="return filtroTeclas(event)"  onkeypress="mascaraCep()" maxlength="9" onfocusout="pesquisacep(cep.value)">
+                                            
+                                            
+                
+
+                                        </div>
+                                  
+
+                                        <div class="col-sm-8">
+                                            <label>Rua</label>
+                                            <input type="text" value="" maxlength=""  class="form-control" name="rua" id="rua">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Bairro</label>
+                                            <input type="text" value="" maxlength="" size="10" class="form-control" name="bairro" id="bairro">
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <label>Número</label>
+                                            <input type="text" value="" maxlength="" size="10" class="form-control" name="numero" id="numero">
+                                        </div>
+
+                                         <div class="col-sm-4">
+
+
+                                        <label>Cidade</label>
+                                            <input type="text" value="" maxlength="100" class="form-control" name="cidade" id="cidade">
+                                        </div>
+
+                                         <div class="col-sm-4">
+                                            <label>Estado</label>
+                                            <select name="uf" id="uf" class="form-control">
+                        <option>Selecione uma opção</option>
+                        <option value="AC">AC</option>
+                        <option value="AL">AL</option>
+                        <option value="AM">AM</option>
+                        <option value="AP">AP</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MG">MG</option>
+                        <option value="MS">MS</option>
+                        <option value="MT">MT</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="PR">PR</option>
+                        <option value="RJ">RJ</option>
+                        <option value="RN">RN</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="RS">RS</option>
+                        <option value="SC">SC</option>
+                        <option value="SE">SE</option>
+                        <option value="SP">SP</option>
+                        <option value="TO">TO</option>
+                    </select>
+
+                </div>
+
+                                        
+             
+                                    </div>
+
+                                </div>
+
+ <p class="lead" style="color: #999;">
+                                Dados do Projeto
+                            </p>
+
+                            <center>
+                                  <div class="col-sm-4">
+                                            <label>Serviço Necessário</label>
+                                            <select name="servico" id="servico" class="form-control">
+                        <option>Selecione uma opção</option>
+                        <option value="Criação de Logotipo">Criação de Logotipo</option>
+                        <option value="Identidade Visual">Identidade Visual</option>
+                        <option value="Elaboração de Arte">Elaboração de Arte</option>
+                    </select>
+
+</center>
+                                         <div class="col-sm-4">
+                                            <label>Quantidade</label>
+                                            <input type="text" value=""  class="form-control" name="qtd" id="qtd">
+                                        </div>
+
+                                         <div class="col-sm-4">
+                                            <label>Segmento</label>
+                                            <input type="text" value=""  class="form-control" name="seg" id="seg">
+                                            <br>
+                                        </div>
+
+                                   
+                        
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <label>Descrição</label>
+                                            <textarea placeholder="Descreva sua ideia, Cores, Dados, Disposição, etc..." maxlength="5000" rows="10" class="form-control" name="msg" id="Textarea1"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <br />
+                                        <button name="reset" type="reset" id="reset" class="btn v-btn no-three-d">Limpar</button>
+
+                                        <button name="enviar" type="submit" id="enviar" class="btn v-btn no-three-d">Enviar</button>
+                                    </div>
+                                </div>
+                            </form> 
+
+
+
+
+
+                        </div>
+                    </div>
+
+                       <div class="row">
+                        <div class="v-spacer col-sm-12 v-height-small"></div>
+                    </div>
+
+                    <div class="row center">
+                        <ul class="social-icons large center">
+                            <li class="twitter"><a href="https://www.instagram.com/tidealuguel/" target="_blank"><i class="fa fa-instagram"></i><i class="fa fa-instagram"></i></a></li>
+                            <li class="facebook"><a href="https://www.facebook.com/tidealuguel1/?eid=ARD4tW7Nd3j2L1Jjw0xnhxolV3HMZm5IEiS6nZvBMJ5ZVg7r2-xrcLyIp1jZ6TPkZHRXjuOPKovuRDM7" target="_blank"><i class="fa fa-facebook"></i><i class="fa fa-facebook"></i></a></li>
+                            <li class="googleplus"><a href="mailto:tidealuguel1@gmail.com" target="_blank"><i class="fa fa-google-plus"></i><i class="fa fa-google-plus"></i></a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--End Call Us-->
+        </div>
+
+        <!--Footer-Wrap-->
+        <div class="footer-wrap">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <section class="widget">
+                                <img alt="Venue" src="img/logo-white.png" style="height: 40px; margin-bottom: 20px;">
+                                <p class="pull-bottom-small">
+                                    Projeto Criado para Trabalho de Conclusão de Curso na Etec de Praia Grande, Orientadores Marcelo Viana de Oliveira Junior e Rafael Costa de Moura.
+                                </p>
+                                <p>
+                                    <a href="projeto.html">Saiba Mais</a>
+                                </p>
+                            </section>
+                        </div>
+                        <div class="col-sm-3">
+                            <section class="widget">
+                                <div class="widget-heading">
+                                    <h4>Contate-nos</h4>
+                                </div>
+                                <div class="footer-contact-info">
+                                    <ul>
+                                        <li>
+                                            <p><i class="fa fa-building"></i>TI de Aluguel </p>
+                                        </li>
+                                        <li>
+                                            <p><i class="fa fa-map-marker"></i>Av. Guadalajara - nº528, Guilhermina Praia Grande - São Paulo</p>
+                                        </li>
+                                        <li>
+                                            <p><i class="fa fa-envelope"></i><strong>Email:</strong> <a href="mailto:tidealuguel1@gmail.com">tidealuguel1@gmail.com</a></p>
+                                        </li>
+                                        <li>
+                                            <p><i class="fa fa-phone"></i><strong>Telefone:</strong> (13) 3478-7459</p>
+                                        </li>
+                                    </ul>
+                                    <br />
+
+                                    <ul class="social-icons standard">
+                                        <li class="twitter"><a href="https://www.instagram.com/tidealuguel/" target="_blank"><i class="fa fa-instagram"></i><i class="fa fa-instagram"></i></a>
+
+                                        </li>
+                                        <li class="facebook"><a href="https://www.facebook.com/tidealuguel1/?eid=ARD4tW7Nd3j2L1Jjw0xnhxolV3HMZm5IEiS6nZvBMJ5ZVg7r2-xrcLyIp1jZ6TPkZHRXjuOPKovuRDM7" target="_blank"><i class="fa fa-facebook"></i><i class="fa fa-facebook"></i></a></li>
+                                        
+                                        
+                                        <li class="googleplus"><a href="mailto:tidealuguel1@gmail.com" target="_blank"><i class="fa fa-google-plus"></i><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+ 
+                        <div class="col-sm-3">
+                            <section class="widget">
+                                <div class="widget-heading">
+                                    <h4>Trabalhos Paralelos</h4>
+                                </div>
+                                <ul class="portfolio-grid">
+                                    <li>
+                                        <a href="jogo/jogo.html" target="_blank" class="grid-img-wrap">
+                                            <img src="img/thumbs/project-1.jpg" />
+                                            <span class="tooltip">Jogo Nave<span class="arrow"></span></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="arcanoide.html" target="_blank" class="grid-img-wrap">
+                                            <img src="img/thumbs/project-2.png" />
+                                            <span class="tooltip">Arkanoid<span class="arrow"></span></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pong.html" target="_blank" class="grid-img-wrap">
+                                            <img src="img/thumbs/project-3.png" />
+                                            <span class="tooltip">Pong<span class="arrow"></span></span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <div class="copyright">
+                <div class="container">
+                    <p>© Copyright 2019 TI de Aluguel. Todos os direitos reservados.</p>
+                    <nav class="footer-menu std-menu">
+                        <ul class="menu">
+                              <li><a href="#why-us">Sobre Nós</a></li>
+                            <li><a href="#features">Serviços</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                            <li><a href="contato.html">Orçamento</a></li>
+                            <li><a href="terms.html"  target="_blank">Termos de Uso</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!--End Footer-Wrap-->
+    </div>
+
+    <!--// BACK TO TOP //-->
+    <div id="back-to-top" class="animate-top"><i class="fa fa-angle-up"></i></div>
+
+    <!-- Libs -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.flexslider-min.js"></script>
+    <script src="js/jquery.easing.js"></script>
+    <script src="js/jquery.fitvids.js"></script>
+    <script src="js/jquery.carouFredSel.min.js"></script>
+    <script src="js/theme-plugins.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/imagesloaded.js"></script>
+
+    <script src="js/view.min.js?auto"></script>
+
+    <script src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+    <script src="js/theme-core.js"></script>
+</body>
+</html>
